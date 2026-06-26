@@ -1,26 +1,26 @@
 [
   {
-    "content": "Phase 1: Get LLM integration playbook (Google Gemma/Gemini via Emergent key) + Vision",
-    "status": "in_progress"
+    "content": "Phase 1: Get LLM integration playbook (Google Gemini via Emergent key) + Vision",
+    "status": "completed"
   },
   {
     "content": "Phase 1: Build CityBrain POC modules (llm_client, citybrain orchestrator, agents, nepal_knowledge, open_meteo)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 1: Write single test_core.py covering all POC user stories (trip plan, weather+activity, Nepali, vision, safety)",
-    "status": "pending"
+    "status": "completed"
   },
   {
-    "content": "Phase 1: Run test_core.py & fix until ALL scenarios pass",
-    "status": "pending"
+    "content": "Phase 1: Run test_core.py & fix until ALL scenarios pass (17/17 passed)",
+    "status": "completed"
   },
   {
     "content": "Phase 2: Get design guidelines from design_agent",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
-    "content": "Phase 2: Build backend (chat/places/trips/budget/weather/emergency/reviews/favorites/profile) + Nepal seed data",
+    "content": "Phase 2: Build backend (CityBrain chat/places/trips/budget/weather/emergency/reviews/favorites/profile) + Nepal seed data",
     "status": "pending"
   },
   {
