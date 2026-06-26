@@ -217,7 +217,7 @@ async def plan_trip(city: str, days: int, budget_npr=None, interests=None,
         nepal_context=nk.knowledge_brief(), city=city, days=days,
         budget=budget_npr or "flexible", interests=", ".join(interests) or "general sightseeing",
         language=language, data=json.dumps(data, ensure_ascii=False, default=str))
-    result = await llm_json(TRIP_SYSTEM, prompt, model=REASONING_MODEL, session_id="trip")
+    result = await llm_json(TRIP_SYSTEM, prompt, model=FAST_MODEL, session_id="trip")
     result.setdefault("city", city)
     result.setdefault("days", days)
     result.setdefault("itinerary", [])

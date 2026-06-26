@@ -86,7 +86,7 @@ export default function Planner() {
         </Button>
       </Card>
 
-      {gen.isPending && <PageLoader label="CityBrain is crafting your itinerary…" />}
+      {gen.isPending && <PageLoader label="CityBrain is crafting your itinerary… this can take ~30s" />}
 
       {trip && !gen.isPending && (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
