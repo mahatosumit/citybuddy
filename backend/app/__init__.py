@@ -1,0 +1,1 @@
+"""CityBuddy backend application package."""
