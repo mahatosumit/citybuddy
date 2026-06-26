@@ -1,10 +1,10 @@
-"""Reviews for places."""
+"""Reviews: public read, authenticated write."""
 import uuid
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException
 
 from ..core.db import db
-from ..core.deps import current_user_id
+from ..core.auth import get_current_user
 from ..schemas import ReviewCreate
 
 router = APIRouter(prefix="/places", tags=["reviews"])
@@ -16,13 +16,13 @@ async def list_reviews(place_id: str):
 
 
 @router.post("/{place_id}/reviews")
-async def add_review(place_id: str, req: ReviewCreate, user_id: str = Depends(current_user_id)):
+async def add_review(place_id: str, req: ReviewCreate, user=Depends(get_current_user)):
     place = await db.places.find_one({"id": place_id}, {"_id": 0})
     if not place:
         raise HTTPException(status_code=404, detail="Place not found")
     review = {
-        "id": str(uuid.uuid4()), "place_id": place_id, "user_id": user_id,
-        "user_name": req.user_name or "Traveler", "rating": req.rating,
+        "id": str(uuid.uuid4()), "place_id": place_id, "user_id": user["user_id"],
+        "user_name": user.get("name") or req.user_name or "Traveler", "rating": req.rating,
         "comment": req.comment, "created_at": datetime.now(timezone.utc).isoformat(),
     }
     await db.reviews.insert_one(dict(review))

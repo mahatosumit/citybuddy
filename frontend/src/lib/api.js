@@ -3,14 +3,27 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const API = `${BACKEND_URL}/api`;
 
-const client = axios.create({
-  baseURL: API,
-  headers: { "Content-Type": "application/json", "X-User-Id": "demo-user" },
+const TOKEN_KEY = "cb_token";
+export const getToken = () => localStorage.getItem(TOKEN_KEY);
+export const setToken = (t) => (t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY));
+
+const client = axios.create({ baseURL: API, withCredentials: true });
+client.interceptors.request.use((config) => {
+  const t = getToken();
+  if (t) config.headers.Authorization = `Bearer ${t}`;
+  return config;
 });
 
 const data = (p) => p.then((r) => r.data);
 
 export const api = {
+  // auth
+  register: (body) => data(client.post("/auth/register", body)),
+  login: (body) => data(client.post("/auth/login", body)),
+  googleSession: (session_id) => data(client.post("/auth/google/session", { session_id })),
+  me: () => data(client.get("/auth/me")),
+  logout: () => data(client.post("/auth/logout")),
+  registerBusiness: () => data(client.post("/auth/register-business")),
   // places
   getPlaces: (params = {}) => data(client.get("/places", { params })),
   getPlace: (id) => data(client.get(`/places/${id}`)),
@@ -31,7 +44,6 @@ export const api = {
   generateTrip: (body) => data(client.post("/trips/generate", body)),
   getTrips: () => data(client.get("/trips")),
   saveTrip: (body) => data(client.post("/trips", body)),
-  getTrip: (id) => data(client.get(`/trips/${id}`)),
   deleteTrip: (id) => data(client.delete(`/trips/${id}`)),
   // budgets
   getBudgets: () => data(client.get("/budgets")),
@@ -40,15 +52,11 @@ export const api = {
   deleteBudget: (id) => data(client.delete(`/budgets/${id}`)),
   // weather
   getWeather: (params = {}) => data(client.get("/weather", { params })),
-  getWeatherCities: () => data(client.get("/weather/cities")),
   // emergency
   getEmergencyNumbers: () => data(client.get("/emergency/numbers")),
-  getEmergencyNearby: (lat, lon, type) =>
-    data(client.get("/emergency/nearby", { params: { lat, lon, type } })),
-  getGuidance: (type) => data(client.get("/emergency/guidance", { params: { type } })),
+  getEmergencyNearby: (lat, lon, type) => data(client.get("/emergency/nearby", { params: { lat, lon, type } })),
   getGuidanceAll: () => data(client.get("/emergency/guidance-all")),
   // nepal
-  nepalOverview: () => data(client.get("/nepal/overview")),
   nepalFestivals: () => data(client.get("/nepal/festivals")),
   nepalTreks: () => data(client.get("/nepal/treks")),
   nepalUnesco: () => data(client.get("/nepal/unesco")),
@@ -59,4 +67,18 @@ export const api = {
   // profile
   getProfile: () => data(client.get("/profile")),
   updateProfile: (body) => data(client.put("/profile", body)),
+  // admin
+  adminStats: () => data(client.get("/admin/stats")),
+  adminUsers: () => data(client.get("/admin/users")),
+  adminSetRole: (uid, role) => data(client.put(`/admin/users/${uid}/role`, { role })),
+  adminCreatePlace: (body) => data(client.post("/admin/places", body)),
+  adminDeletePlace: (id) => data(client.delete(`/admin/places/${id}`)),
+  adminReviews: () => data(client.get("/admin/reviews")),
+  adminDeleteReview: (id) => data(client.delete(`/admin/reviews/${id}`)),
+  // business
+  bizClaim: (place_id) => data(client.post("/business/claim", { place_id })),
+  bizListings: () => data(client.get("/business/listings")),
+  bizUpdateListing: (id, body) => data(client.put(`/business/listings/${id}`, body)),
+  bizReviews: () => data(client.get("/business/reviews")),
+  bizReply: (rid, reply) => data(client.post(`/business/reviews/${rid}/reply`, { reply })),
 };

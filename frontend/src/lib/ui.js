@@ -1,35 +1,38 @@
 import {
   MessageSquare, Map, CalendarRange, CloudSun, Wallet, Camera,
   Mountain, ShieldAlert, Bookmark, User, Home, Hotel, UtensilsCrossed,
-  Landmark, PartyPopper, MapPin,
+  Landmark, PartyPopper, MapPin, LayoutDashboard, Store,
 } from "lucide-react";
 
-// Primary + secondary navigation (shared by sidebar + bottom tabs)
 export const PRIMARY_NAV = [
-  { to: "/", label: "Home", icon: Home, testid: "nav-home" },
-  { to: "/chat", label: "CityBrain", icon: MessageSquare, testid: "nav-chat" },
-  { to: "/explore", label: "Explore", icon: Map, testid: "nav-explore" },
-  { to: "/planner", label: "Trip Planner", icon: CalendarRange, testid: "nav-planner" },
-  { to: "/weather", label: "Weather", icon: CloudSun, testid: "nav-weather" },
-  { to: "/budget", label: "Budget", icon: Wallet, testid: "nav-budget" },
+  { to: "/", labelKey: "nav.home", icon: Home, testid: "nav-home" },
+  { to: "/chat", labelKey: "nav.chat", icon: MessageSquare, testid: "nav-chat" },
+  { to: "/explore", labelKey: "nav.explore", icon: Map, testid: "nav-explore" },
+  { to: "/planner", labelKey: "nav.planner", icon: CalendarRange, testid: "nav-planner" },
+  { to: "/weather", labelKey: "nav.weather", icon: CloudSun, testid: "nav-weather" },
+  { to: "/budget", labelKey: "nav.budget", icon: Wallet, testid: "nav-budget" },
 ];
 
 export const SECONDARY_NAV = [
-  { to: "/camera", label: "Camera AI", icon: Camera, testid: "nav-camera" },
-  { to: "/nepal", label: "Nepal Intel", icon: Mountain, testid: "nav-nepal" },
-  { to: "/saved", label: "Saved", icon: Bookmark, testid: "nav-saved" },
-  { to: "/emergency", label: "Emergency", icon: ShieldAlert, testid: "nav-emergency", danger: true },
+  { to: "/camera", labelKey: "nav.camera", icon: Camera, testid: "nav-camera" },
+  { to: "/nepal", labelKey: "nav.nepal", icon: Mountain, testid: "nav-nepal" },
+  { to: "/saved", labelKey: "nav.saved", icon: Bookmark, testid: "nav-saved" },
+  { to: "/emergency", labelKey: "nav.emergency", icon: ShieldAlert, testid: "nav-emergency", danger: true },
 ];
+
+export const ROLE_NAV = {
+  admin: { to: "/admin", labelKey: "nav.admin", icon: LayoutDashboard, testid: "nav-admin" },
+  business: { to: "/business", labelKey: "nav.business", icon: Store, testid: "nav-business" },
+};
 
 export const BOTTOM_NAV = [
-  { to: "/chat", label: "CityBrain", icon: MessageSquare, testid: "tab-chat" },
-  { to: "/explore", label: "Explore", icon: Map, testid: "tab-explore" },
-  { to: "/planner", label: "Planner", icon: CalendarRange, testid: "tab-planner" },
-  { to: "/saved", label: "Saved", icon: Bookmark, testid: "tab-saved" },
-  { to: "/profile", label: "Profile", icon: User, testid: "tab-profile" },
+  { to: "/chat", labelKey: "nav.chat", icon: MessageSquare, testid: "tab-chat" },
+  { to: "/explore", labelKey: "nav.explore", icon: Map, testid: "tab-explore" },
+  { to: "/planner", labelKey: "nav.planner", icon: CalendarRange, testid: "tab-planner" },
+  { to: "/saved", labelKey: "nav.saved", icon: Bookmark, testid: "tab-saved" },
+  { to: "/profile", labelKey: "nav.profile", icon: User, testid: "tab-profile" },
 ];
 
-// place type -> icon + color (matches map pin colors)
 export const TYPE_META = {
   hotel: { icon: Hotel, color: "#1E2A5A", label: "Hotel" },
   restaurant: { icon: UtensilsCrossed, color: "#F59E0B", label: "Restaurant" },
@@ -37,7 +40,6 @@ export const TYPE_META = {
   event: { icon: PartyPopper, color: "#DC2626", label: "Event" },
   default: { icon: MapPin, color: "#0EA5A4", label: "Place" },
 };
-
 export const typeMeta = (t) => TYPE_META[t] || TYPE_META.default;
 
 export function formatNPR(n) {

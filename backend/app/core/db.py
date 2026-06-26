@@ -37,3 +37,8 @@ async def ensure_indexes() -> None:
     await db.reviews.create_index("place_id")
     await db.favorites.create_index([("user_id", 1), ("place_id", 1)], unique=True)
     await db.profiles.create_index("user_id", unique=True)
+    # auth
+    await db.users.create_index("user_id", unique=True)
+    await db.users.create_index("email", unique=True)
+    await db.user_sessions.create_index("session_token", unique=True)
+    await db.user_sessions.create_index("user_id")

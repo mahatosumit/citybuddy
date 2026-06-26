@@ -1,30 +1,50 @@
 [
   {
-    "content": "Phase 1: CityBrain POC proven (17/17)",
-    "status": "completed"
+    "content": "Phase 3: Get Emergent Google Auth integration playbook",
+    "status": "in_progress"
   },
   {
-    "content": "Phase 2: Design guidelines from design_agent",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Backend (CityBrain chat/places/trips/budget/weather/emergency/reviews/favorites/profile/vision/nepal) + Nepal seed data",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: Premium React frontend (shell, Home, Chat, Explore+Map, Place detail, Trip Planner, Weather, Budget, Emergency, Camera AI, Nepal hub, Saved, Profile)",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 2: End-to-end testing via testing_agent_v3 (Backend 94.6%, Frontend 100%, 0 critical bugs) + UX fix",
-    "status": "completed"
-  },
-  {
-    "content": "Phase 3: Auth (email+Google), live camera, Voice, multilingual UI toggle, PWA offline",
+    "content": "Phase 3: Backend auth — email/password JWT + Emergent Google session, User model, RBAC (user/business/admin), first-user=admin, migrate all routers from demo-user to authenticated user",
     "status": "pending"
   },
   {
-    "content": "Phase 4: Admin & Business dashboards, hardening, docs",
+    "content": "Phase 3: Frontend auth — AuthContext, Login/Register pages, Continue with Google, protected routes, profile from real user, logout",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Live camera capture (getUserMedia) in Camera AI + file fallback",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Voice assistant (Web Speech API STT input + TTS output) in Chat",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Full multilingual UI toggle (EN/NE) via i18n dictionary across app",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: PWA/offline (manifest + service worker, cache core assets/data)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: testing_agent_v3 end-to-end + fix bugs",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Admin dashboard (manage places/reviews/users, analytics)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Business dashboard (register business, manage own listings, respond to reviews)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Security hardening (rate limiting, input validation, audit log) + README/API docs",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: testing_agent_v3 end-to-end + fix bugs",
     "status": "pending"
   }
 ]

@@ -7,7 +7,8 @@ from starlette.middleware.cors import CORSMiddleware
 from app.core.db import ensure_indexes, client
 from app.data.seed import seed_if_needed
 from app.routers import (
-    chat, places, reviews, favorites, trips, budget, weather, emergency, nepal, vision, profile,
+    auth, chat, places, reviews, favorites, trips, budget, weather, emergency, nepal, vision, profile,
+    admin, business,
 )
 
 logging.basicConfig(level=logging.INFO,
@@ -31,7 +32,7 @@ async def health():
 
 
 # Mount feature routers under /api
-for r in (chat, places, reviews, favorites, trips, budget, weather, emergency, nepal, vision, profile):
+for r in (auth, chat, places, reviews, favorites, trips, budget, weather, emergency, nepal, vision, profile, admin, business):
     api_router.include_router(r.router)
 
 app.include_router(api_router)
